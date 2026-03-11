@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Analog-Digital-Umsetzer - Referat</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/monokai.min.css">
+	<style>
+		.reveal section {
+			color: #e0e0e0;
+			font-family: 'Arial', sans-serif;
+			height: 100%;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+		.reveal section h1,
+		.reveal section h2,
+		.reveal section h3,
+		.reveal section h4 {
+			color: #ffffff;
+			text-transform: none;
+			font-weight: 600;
+			margin-bottom: 0.8em;
+		}
+		.reveal section p,
+		.reveal section li {
+			font-size: 1.4rem;
+			line-height: 1.4;
+			color: #e0e0e0;
+			margin-bottom: 0.5em;
+		}
+		.reveal section ul {
+			margin-left: 1.2em;
+		}
+		.speaker-badge {
+			display: inline-block;
+			background: #333;
+			color: #00d4ff;
+			padding: 4px 12px;
+			border-radius: 20px;
+			font-size: 1rem;
+			margin-bottom: 15px;
+			border: 1px solid #00d4ff;
+		}
+		.math-formula {
+			background: rgba(255,255,255,0.1);
+			padding: 12px;
+			border-radius: 6px;
+			margin: 10px 0;
+			font-family: 'Courier New', monospace;
+			border-left: 4px solid #00d4ff;
+			color: #ffffff;
+			font-size: 1.3rem;
+		}
+		.content-block {
+			background: rgba(255,255,255,0.08);
+			padding: 15px;
+			border-radius: 6px;
+			margin: 12px 0;
+			border-left: 4px solid #00d4ff;
+		}
+		.error-block {
+			background: rgba(255,100,100,0.1);
+			padding: 12px;
+			border-radius: 6px;
+			margin: 10px 0;
+			border-left: 4px solid #ff4444;
+		}
+		.process-step {
+			background: rgba(0,212,255,0.1);
+			padding: 12px;
+			border-radius: 6px;
+			margin: 10px 0;
+			border-left: 4px solid #00d4ff;
+		}
+		.two-column {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 20px;
+			align-items: start;
+		}
+		.comparison-table {
+			font-size: 1.1rem;
+			width: 100%;
+			margin: 12px 0;
+			border-collapse: collapse;
+		}
+		.comparison-table th {
+			background: rgba(0,212,255,0.2);
+			padding: 8px;
+			color: #ffffff;
+			border-bottom: 2px solid #00d4ff;
+		}
+		.comparison-table td {
+			padding: 8px;
+			border-bottom: 1px solid rgba(255,255,255,0.1);
+			color: #e0e0e0;
+			text-align: center;
+		}
+		.highlight {
+			color: #00d4ff;
+			font-weight: 600;
+		}
+		.error-highlight {
+			color: #ff6b6b;
+			font-weight: 600;
+		}
+		.section-title {
+			text-align: center;
+			margin-bottom: 1em;
+		}
+		.technical-detail {
+			font-family: 'Courier New', monospace;
+			background: rgba(0,0,0,0.3);
+			padding: 1px 4px;
+			border-radius: 3px;
+			font-size: 1.2rem;
+		}
+		.compact-list {
+			font-size: 1.2rem;
+			line-height: 1.3;
+		}
+		.compact-list li {
+			margin-bottom: 0.4em;
+		}
+		.architecture-detail {
+			background: rgba(255,255,255,0.05);
+			padding: 15px;
+			border-radius: 6px;
+			margin: 10px 0;
+			border: 1px solid rgba(255,255,255,0.1);
+		}
+		.step-number {
+			background: #00d4ff;
+			color: #000;
+			width: 28px;
+			height: 28px;
+			border-radius: 50%;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 10px;
+			font-weight: bold;
+			font-size: 1rem;
+		}
+	</style>
+</head>
+<body>
+<div class="reveal">
+	<div class="slides">
+
+		<section>
+			<h1>Analog-Digital-Umsetzer</h1>
+			<h3>Die Brücke zwischen unserer und der digitalen Welt</h3>
+			<p style="margin-top: 50px; font-size: 1.2rem;">Ein Referat von [Name Person A] & [Name Person B]</p>
+		</section>
+
+		<section>
+			<div class="section-title">
+				<h2>Wozu brauchen wir ADUs?</h2>
+			</div>
+			<div class="two-column">
+				<div>
+					<span class="speaker-badge">Person A</span>
+					<div class="content-block">
+						<h4>Die analoge Echtwelt</h4>
+						<p>Mikrofone, Temperatursensoren oder Kameras liefern uns kontinuierliche Spannungswerte.</p>
+					</div>
+				</div>
+				<div>
+					<span class="speaker-badge">Person B</span>
+					<div class="content-block">
+						<h4>Die digitale Verarbeitung</h4>
+						<p>Mikrocontroller (Arduino, STM32) arbeiten aber nur mit diskreten Takten und Nullen & Einsen.</p>
+					</div>
+				</div>
+			</div>
+			<div class="content-block" style="text-align: center; margin-top: 30px;">
+				<p>Der <strong>ADU (Analog-to-Digital Converter)</strong> ist der Dolmetscher zwischen diesen beiden Welten.</p>
+			</div>
+		</section>
+
+		<section>
+			<section>
+				<span class="speaker-badge">Person A</span>
+				<div class="section-title">
+					<h2>Grundlagen der Signale</h2>
+				</div>
+				<div class="two-column">
+					<div>
+						<div class="content-block">
+							<h4>Zeit- & Wertkontinuierlich</h4>
+							<ul class="compact-list">
+								<li>Die reale Welt ist analog.</li>
+								<li>Beispiel: Temperaturverlauf.</li>
+								<li>Unendlich viele Zwischenwerte zu jedem unendlich kleinen Zeitpunkt.</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<div class="content-block" style="border-left-color: #ff6b6b;">
+							<h4>Zeit- & Wertdiskret</h4>
+							<ul class="compact-list">
+								<li>Die digitale Welt.</li>
+								<li>Abstufungen in festen Zeitabständen (Takt).</li>
+								<li>Abstufungen in festen Spannungswerten (Bits).</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Person A</span>
+				<h3>Die 3 Schritte der Umsetzung</h3>
+
+				<div class="process-step">
+					<h4><span class="step-number">1</span> Abtastung (Sample & Hold)</h4>
+					<p>Aus zeitkontinuierlich wird <span class="highlight">zeitdiskret</span>. Ein Kondensator speichert die aktuelle Spannung für einen Taktzyklus ("Schnappschuss").</p>
+				</div>
+
+				<div class="process-step">
+					<h4><span class="step-number">2</span> Quantisierung</h4>
+					<p>Aus wertkontinuierlich wird <span class="highlight">wertdiskret</span>. Vergleich der Spannung mit festen Referenzstufen (wie bei einem Lineal).</p>
+				</div>
+
+				<div class="process-step">
+					<h4><span class="step-number">3</span> Codierung</h4>
+					<p>Die ermittelte Stufe wird in eine <span class="highlight">Binärzahl</span> für den Mikrocontroller übersetzt.</p>
+				</div>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Person A</span>
+				<h3>Die zwei großen Probleme</h3>
+
+				<div class="two-column">
+					<div>
+						<div class="error-block">
+							<h4>1. Quantisierungsrauschen</h4>
+							<p>Rundungsfehler, weil unser "Lineal" zu grob ist.</p>
+							<p><span class="highlight">Lösung:</span> Höhere Auflösung (z.B. 12 Bit statt 8 Bit).</p>
+						</div>
+					</div>
+					<div>
+						<div class="error-block">
+							<h4>2. Aliasing-Effekt</h4>
+							<p>Falsche Signale durch zu langsame Abtastung (Unterabtastung).</p>
+							<p><span class="highlight">Lösung:</span> Anti-Aliasing-Filter & Nyquist-Shannon-Theorem:</p>
+							<div class="math-formula">
+								f_abtast > 2 · f_max
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<span class="speaker-badge">Person B</span>
+				<div class="section-title">
+					<h2>Die Umsetzverfahren</h2>
+					<p>In der Praxis gibt es nicht "den einen" ADU.</p>
+				</div>
+				<div class="two-column">
+					<div>
+						<div class="content-block">
+							<h4>Fokus: Geschwindigkeit</h4>
+							<ul class="compact-list">
+								<li>Flash-ADC</li>
+								<li>SAR-ADC (Allrounder)</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<div class="content-block">
+							<h4>Fokus: Genauigkeit</h4>
+							<ul class="compact-list">
+								<li>Dual-Slope-ADC</li>
+								<li>Sigma-Delta-ADC</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Person B</span>
+				<h3>1. Flash-ADC (Parallelumsetzer)</h3>
+				<div class="architecture-detail">
+					<h4>Prinzip: Die Lichtschranken</h4>
+					<p>Das Signal wird gleichzeitig an alle Komparatoren angelegt. Ein Priority-Encoder liefert sofort das Ergebnis.</p>
+				</div>
+
+				<div class="two-column">
+					<div>
+						<div class="content-block">
+							<h4>Vorteile</h4>
+							<ul class="compact-list">
+								<li><span class="highlight">Rasend schnell</span> (Echtzeit)</li>
+								<li>Einsatz: Oszilloskope, RADAR</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<div class="content-block">
+							<h4>Nachteile</h4>
+							<ul class="compact-list">
+								<li>Enormer Hardwareaufwand: <span class="technical-detail">2ⁿ - 1</span> Komparatoren</li>
+								<li>Hoher Stromverbrauch</li>
+								<li>Geringe Auflösung (meist max. 8-10 Bit)</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Person B</span>
+				<h3>2. SAR-ADC (Sukzessive Approximation)</h3>
+				<div class="architecture-detail">
+					<h4>Prinzip: Die Balkenwaage</h4>
+					<p>Probiert bitweise (von MSB zu LSB) aus, ob die interne Spannung größer oder kleiner als das Signal ist.</p>
+				</div>
+
+				<div class="two-column">
+					<div>
+						<div class="content-block">
+							<h4>Vorteile</h4>
+							<ul class="compact-list">
+								<li><span class="highlight">Der Allrounder</span></li>
+								<li>Braucht nur 1 Komparator</li>
+								<li>Guter Kompromiss aus Tempo und Auflösung (10-16 Bit)</li>
+								<li>Standard in jedem Mikrocontroller</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<div class="content-block">
+							<h4>Nachteile</h4>
+							<ul class="compact-list">
+								<li>Langsamer als Flash</li>
+								<li>Braucht n Taktzyklen für n Bits</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Person B</span>
+				<h3>3. Dual-Slope-ADC (Zweirampenverfahren)</h3>
+				<div class="architecture-detail">
+					<h4>Prinzip: Zeitmessung statt Vergleichen</h4>
+					<p>Ein Kondensator wird für eine feste Zeit mit dem Signal aufgeladen. Danach wird gemessen, wie lange das Entladen mit einer Referenzspannung dauert.</p>
+				</div>
+
+				<div class="two-column">
+					<div>
+						<div class="content-block">
+							<h4>Vorteile</h4>
+							<ul class="compact-list">
+								<li><span class="highlight">Extrem genau</span></li>
+								<li>Filtert Störungen (z.B. 50Hz Netzbrummen) gut heraus</li>
+								<li>Einsatz: Digitale Multimeter</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<div class="content-block">
+							<h4>Nachteile</h4>
+							<ul class="compact-list">
+								<li>Sehr langsam (nur wenige Messungen pro Sekunde)</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Person B</span>
+				<h3>4. Sigma-Delta-ADC (ΔΣ-ADC)</h3>
+				<div class="architecture-detail">
+					<h4>Prinzip: Oversampling & Noise Shaping</h4>
+					<p>Tastet extrem schnell, aber nur mit <span class="highlight">1 Bit</span> ab. Ein digitaler Filter rechnet den schnellen 1-Bit Strom zu einem langsamen, hochauflösenden Strom zusammen.</p>
+				</div>
+
+				<div class="two-column">
+					<div>
+						<div class="content-block">
+							<h4>Vorteile</h4>
+							<ul class="compact-list">
+								<li><span class="highlight">Die Königsklasse</span></li>
+								<li>Höchste Auflösungen machbar (24 - 32 Bit)</li>
+								<li>Einsatz: Hi-Fi Audio, Präzisionswaagen</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<div class="content-block">
+							<h4>Nachteile</h4>
+							<ul class="compact-list">
+								<li>Komplexe Mathematik im Hintergrund</li>
+								<li>Filter sorgt für Signal-Latenz (Verzögerung)</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<span class="speaker-badge">Beide</span>
+				<div class="section-title">
+					<h2>Zusammenfassung</h2>
+				</div>
+
+				<table class="comparison-table">
+					<tr>
+						<th>Architektur</th>
+						<th>Geschwindigkeit</th>
+						<th>Auflösung</th>
+						<th>Hauptanwendung</th>
+					</tr>
+					<tr>
+						<td><strong>Flash-ADC</strong></td>
+						<td>Sehr hoch (Echtzeit)</td>
+						<td>Niedrig (6-10 Bit)</td>
+						<td>Oszilloskope, RADAR</td>
+					</tr>
+					<tr>
+						<td><strong>SAR-ADC</strong></td>
+						<td>Mittel</td>
+						<td>Mittel (10-16 Bit)</td>
+						<td>Mikrocontroller</td>
+					</tr>
+					<tr>
+						<td><strong>Dual-Slope</strong></td>
+						<td>Sehr langsam</td>
+						<td>Hoch (bis 20 Bit)</td>
+						<td>Multimeter</td>
+					</tr>
+					<tr>
+						<td><strong>Sigma-Delta</strong></td>
+						<td>Niedrig bis Mittel</td>
+						<td>Sehr hoch (24-32 Bit)</td>
+						<td>Audio, Sensoren</td>
+					</tr>
+				</table>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Beide</span>
+				<div class="section-title" style="margin-top: 50px;">
+					<h2>Vielen Dank für die Aufmerksamkeit!</h2>
+					<p class="highlight" style="font-size: 1.5rem; margin-top: 30px;">Gibt es noch Fragen?</p>
+				</div>
+			</section>
+		</section>
+
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/math/math.min.js"></script>
+<script>
+	Reveal.initialize({
+		hash: true,
+		plugins: [ RevealHighlight, RevealMath ],
+		transition: 'slide',
+		backgroundTransition: 'fade',
+		pdfSeparateFragments: false,
+		controls: true,
+		progress: true,
+		center: true,
+		width: 1100,
+		height: 700,
+		margin: 0.1
+	});
+</script>
+</body>
+</html>
