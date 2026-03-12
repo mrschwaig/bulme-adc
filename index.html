@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Analog-Digital-Umsetzer</title>
+	<title>Analog-Digital-Umsetzer - Referat</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/monokai.min.css">
@@ -145,6 +145,21 @@
 			font-weight: bold;
 			font-size: 1rem;
 		}
+		.slide-image {
+			max-height: 380px;
+			margin: 10px auto;
+			display: block;
+			background: #ffffff;
+			padding: 10px;
+			border-radius: 8px;
+		}
+		.falstad-iframe {
+			width: 100%;
+			height: 550px;
+			border: 2px solid #00d4ff;
+			border-radius: 8px;
+			background: #fff;
+		}
 	</style>
 </head>
 <body>
@@ -154,7 +169,7 @@
 		<section>
 			<h1>Analog-Digital-Umsetzer</h1>
 			<h3>Die Brücke zwischen unserer und der digitalen Welt</h3>
-			<p style="margin-top: 50px; font-size: 1.2rem;">Ein Referat von Christoph & Michi</p>
+			<p style="margin-top: 50px; font-size: 1.2rem;">Ein Referat von Christoph S. & Michi R.</p>
 		</section>
 
 		<section>
@@ -163,14 +178,14 @@
 			</div>
 			<div class="two-column">
 				<div>
-					<span class="speaker-badge">Christoph</span>
+					<span class="speaker-badge">Christoph S.</span>
 					<div class="content-block">
 						<h4>Die analoge Echtwelt</h4>
 						<p>Mikrofone, Temperatursensoren oder Kameras liefern uns kontinuierliche Spannungswerte.</p>
 					</div>
 				</div>
 				<div>
-					<span class="speaker-badge">Michi</span>
+					<span class="speaker-badge">Michi R.</span>
 					<div class="content-block">
 						<h4>Die digitale Verarbeitung</h4>
 						<p>Mikrocontroller (Arduino, STM32) arbeiten aber nur mit diskreten Takten und Nullen & Einsen.</p>
@@ -184,36 +199,28 @@
 
 		<section>
 			<section>
-				<span class="speaker-badge">Christoph</span>
+				<span class="speaker-badge">Christoph S.</span>
 				<div class="section-title">
 					<h2>Grundlagen der Signale</h2>
 				</div>
 				<div class="two-column">
 					<div>
 						<div class="content-block">
-							<h4>Zeit- & Wertkontinuierlich</h4>
+							<h4>Kontinuierlich vs. Diskret</h4>
 							<ul class="compact-list">
-								<li>Die reale Welt ist analog.</li>
-								<li>Beispiel: Temperaturverlauf.</li>
-								<li>Unendlich viele Zwischenwerte zu jedem unendlich kleinen Zeitpunkt.</li>
+								<li><span class="highlight">Analog:</span> Zeit- und wertkontinuierlich (unendlich viele Zwischenwerte).</li>
+								<li><span class="highlight">Digital:</span> Zeit- und wertdiskret (feste Taktung & feste Spannungsstufen).</li>
 							</ul>
 						</div>
 					</div>
 					<div>
-						<div class="content-block" style="border-left-color: #ff6b6b;">
-							<h4>Zeit- & Wertdiskret</h4>
-							<ul class="compact-list">
-								<li>Die digitale Welt.</li>
-								<li>Abstufungen in festen Zeitabständen (Takt).</li>
-								<li>Abstufungen in festen Spannungswerten (Bits).</li>
-							</ul>
-						</div>
+						<img src="abbildung-1.png" alt="Zeit- und wertkontinuierliche vs. diskrete Signale" class="slide-image">
 					</div>
 				</div>
 			</section>
 
 			<section>
-				<span class="speaker-badge">Christoph</span>
+				<span class="speaker-badge">Christoph S.</span>
 				<h3>Die 3 Schritte der Umsetzung</h3>
 
 				<div class="process-step">
@@ -223,7 +230,7 @@
 
 				<div class="process-step">
 					<h4><span class="step-number">2</span> Quantisierung</h4>
-					<p>Aus wertkontinuierlich wird <span class="highlight">wertdiskret</span>. Vergleich der Spannung mit festen Referenzstufen (wie bei einem Lineal).</p>
+					<p>Aus wertkontinuierlich wird <span class="highlight">wertdiskret</span>. Vergleich der Spannung mit festen Referenzstufen.</p>
 				</div>
 
 				<div class="process-step">
@@ -233,26 +240,31 @@
 			</section>
 
 			<section>
-				<span class="speaker-badge">Christoph</span>
-				<h3>Die zwei großen Probleme</h3>
-
+				<span class="speaker-badge">Christoph S.</span>
+				<h3>Das Quantisierungsrauschen</h3>
 				<div class="two-column">
 					<div>
 						<div class="error-block">
-							<h4>1. Quantisierungsrauschen</h4>
-							<p>Rundungsfehler, weil unser "Lineal" zu grob ist.</p>
+							<h4>Rundungsfehler durch das "Lineal"</h4>
+							<p>Der analoge Wert wird in eine Art Raster gezwängt. Dadurch geht Information verloren.</p>
 							<p><span class="highlight">Lösung:</span> Höhere Auflösung (z.B. 12 Bit statt 8 Bit).</p>
 						</div>
 					</div>
 					<div>
-						<div class="error-block">
-							<h4>2. Aliasing-Effekt</h4>
-							<p>Falsche Signale durch zu langsame Abtastung (Unterabtastung).</p>
-							<p><span class="highlight">Lösung:</span> Anti-Aliasing-Filter & Nyquist-Shannon-Theorem:</p>
-							<div class="math-formula">
-								f_abtast > 2 · f_max
-							</div>
-						</div>
+						<img src="abbildung-2.jpg" alt="Quantisierung und Kodierung" class="slide-image">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Christoph S.</span>
+				<h3>Aliasing-Effekt</h3>
+				<div class="error-block" style="width: 80%; margin: 0 auto;">
+					<h4>Unterabtastung</h4>
+					<p>Falsche Signale durch zu langsame Abtastung. Schnelle Frequenzen erscheinen plötzlich als langsame Signale.</p>
+					<p><span class="highlight">Lösung:</span> Anti-Aliasing-Filter & Nyquist-Shannon-Theorem:</p>
+					<div class="math-formula" style="text-align: center; font-size: 1.8rem;">
+						f_abtast > 2 · f_max
 					</div>
 				</div>
 			</section>
@@ -260,27 +272,31 @@
 
 		<section>
 			<section>
-				<span class="speaker-badge">Michi</span>
+				<span class="speaker-badge">Christoph S.</span>
 				<div class="section-title">
-					<h2>Die Umsetzverfahren</h2>
-					<p>In der Praxis gibt es nicht "den einen" ADU.</p>
+					<h2>Klassifizierung der Umsetzer</h2>
+					<p>Bevor wir in die Schaltungen gehen, unterscheiden wir zwei Grundprinzipien:</p>
 				</div>
 				<div class="two-column">
 					<div>
 						<div class="content-block">
-							<h4>Fokus: Geschwindigkeit</h4>
+							<h4>Momentanwert-Umsetzer</h4>
 							<ul class="compact-list">
-								<li>Flash-ADC</li>
-								<li>SAR-ADC (Allrounder)</li>
+								<li>Werten das Signal zu einem exakten, winzigen Zeitpunkt aus ("Schnappschuss").</li>
+								<li><span class="highlight">Vorteil:</span> Sehr schnell.</li>
+								<li><span class="error-highlight">Nachteil:</span> Sehr empfindlich gegen kurze Störungen / Rauschen.</li>
+								<li><strong>Vertreter:</strong> Flash-ADC, SAR-ADC</li>
 							</ul>
 						</div>
 					</div>
 					<div>
 						<div class="content-block">
-							<h4>Fokus: Genauigkeit</h4>
+							<h4>Integrierende Umsetzer</h4>
 							<ul class="compact-list">
-								<li>Dual-Slope-ADC</li>
-								<li>Sigma-Delta-ADC</li>
+								<li>Integrieren das Signal über einen bestimmten Zeitraum (Flächenberechnung).</li>
+								<li><span class="highlight">Vorteil:</span> Störungen (z.B. 50Hz Netzbrummen) werden "herausgemittelt" -> extrem präzise.</li>
+								<li><span class="error-highlight">Nachteil:</span> Eher langsam.</li>
+								<li><strong>Vertreter:</strong> Dual-Slope</li>
 							</ul>
 						</div>
 					</div>
@@ -288,7 +304,7 @@
 			</section>
 
 			<section>
-				<span class="speaker-badge">Michi</span>
+				<span class="speaker-badge">Michi R.</span>
 				<h3>1. Flash-ADC (Parallelumsetzer)</h3>
 				<div class="architecture-detail">
 					<h4>Prinzip: Die Lichtschranken</h4>
@@ -310,8 +326,7 @@
 							<h4>Nachteile</h4>
 							<ul class="compact-list">
 								<li>Enormer Hardwareaufwand: <span class="technical-detail">2ⁿ - 1</span> Komparatoren</li>
-								<li>Hoher Stromverbrauch</li>
-								<li>Geringe Auflösung (meist max. 8-10 Bit)</li>
+								<li>Hoher Stromverbrauch, meist nur max. 8-10 Bit</li>
 							</ul>
 						</div>
 					</div>
@@ -319,7 +334,13 @@
 			</section>
 
 			<section>
-				<span class="speaker-badge">Michi</span>
+				<span class="speaker-badge">Michi R.</span>
+				<h3>Simulation: Flash-ADC</h3>
+				<iframe class="falstad-iframe" src="https://falstad.com/circuit/circuitjs.html"></iframe>
+			</section>
+
+			<section>
+				<span class="speaker-badge">Michi R.</span>
 				<h3>2. SAR-ADC (Sukzessive Approximation)</h3>
 				<div class="architecture-detail">
 					<h4>Prinzip: Die Balkenwaage</h4>
@@ -334,7 +355,6 @@
 								<li><span class="highlight">Der Allrounder</span></li>
 								<li>Braucht nur 1 Komparator</li>
 								<li>Guter Kompromiss aus Tempo und Auflösung (10-16 Bit)</li>
-								<li>Standard in jedem Mikrocontroller</li>
 							</ul>
 						</div>
 					</div>
@@ -351,7 +371,13 @@
 			</section>
 
 			<section>
-				<span class="speaker-badge">Michi</span>
+				<span class="speaker-badge">Michi R.</span>
+				<h3>Simulation: SAR-ADC</h3>
+				<img src="abbildung-3.jpg">
+			</section>
+
+			<section>
+				<span class="speaker-badge">Michi R.</span>
 				<h3>3. Dual-Slope-ADC (Zweirampenverfahren)</h3>
 				<div class="architecture-detail">
 					<h4>Prinzip: Zeitmessung statt Vergleichen</h4>
@@ -381,7 +407,13 @@
 			</section>
 
 			<section>
-				<span class="speaker-badge">Michi</span>
+				<span class="speaker-badge">Michi R.</span>
+				<h3>Simulation: Dual-Slope-ADC</h3>
+				<img src="abbildung-4.jpg">
+			</section>
+
+			<section>
+				<span class="speaker-badge">Michi R.</span>
 				<h3>4. Sigma-Delta-ADC (ΔΣ-ADC)</h3>
 				<div class="architecture-detail">
 					<h4>Prinzip: Oversampling & Noise Shaping</h4>
@@ -410,11 +442,17 @@
 					</div>
 				</div>
 			</section>
+
+			<section>
+				<span class="speaker-badge">Michi R.</span>
+				<h3>Simulation: Sigma-Delta-ADC</h3>
+				<iframe class="falstad-iframe" src="https://falstad.com/circuit/circuitjs.html"></iframe>
+			</section>
 		</section>
 
 		<section>
 			<section>
-				<span class="speaker-badge">Beide</span>
+				<span class="speaker-badge">Christoph S. & Michi R.</span>
 				<div class="section-title">
 					<h2>Zusammenfassung</h2>
 				</div>
@@ -422,30 +460,35 @@
 				<table class="comparison-table">
 					<tr>
 						<th>Architektur</th>
+						<th>Prinzip</th>
 						<th>Geschwindigkeit</th>
 						<th>Auflösung</th>
-						<th>Hauptanwendung</th>
+						<th>Anwendung</th>
 					</tr>
 					<tr>
 						<td><strong>Flash-ADC</strong></td>
-						<td>Sehr hoch (Echtzeit)</td>
+						<td>Momentanwert</td>
+						<td>Sehr hoch</td>
 						<td>Niedrig (6-10 Bit)</td>
-						<td>Oszilloskope, RADAR</td>
+						<td>Oszilloskope</td>
 					</tr>
 					<tr>
 						<td><strong>SAR-ADC</strong></td>
+						<td>Momentanwert</td>
 						<td>Mittel</td>
 						<td>Mittel (10-16 Bit)</td>
 						<td>Mikrocontroller</td>
 					</tr>
 					<tr>
 						<td><strong>Dual-Slope</strong></td>
+						<td>Integrierend</td>
 						<td>Sehr langsam</td>
 						<td>Hoch (bis 20 Bit)</td>
 						<td>Multimeter</td>
 					</tr>
 					<tr>
 						<td><strong>Sigma-Delta</strong></td>
+						<td>Integrierend (Oversampling)</td>
 						<td>Niedrig bis Mittel</td>
 						<td>Sehr hoch (24-32 Bit)</td>
 						<td>Audio, Sensoren</td>
@@ -454,7 +497,7 @@
 			</section>
 
 			<section>
-				<span class="speaker-badge">Beide</span>
+				<span class="speaker-badge">Christoph S. & Michi R.</span>
 				<div class="section-title" style="margin-top: 50px;">
 					<h2>Vielen Dank für die Aufmerksamkeit!</h2>
 					<p class="highlight" style="font-size: 1.5rem; margin-top: 30px;">Gibt es noch Fragen?</p>
